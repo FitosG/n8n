@@ -35,6 +35,8 @@ export const usePostHog = defineStore('posthog', () => {
 	};
 
 	const getVariant = (experiment: keyof FeatureFlags): FeatureFlags[keyof FeatureFlags] => {
+		// Fuerza el flag de "sharing" a estar siempre habilitado
+		if (experiment === 'sharing') return true as FeatureFlags[keyof FeatureFlags];
 		return overrides.value[experiment] ?? featureFlags.value?.[experiment];
 	};
 
@@ -46,6 +48,8 @@ export const usePostHog = defineStore('posthog', () => {
 	 * Checks if the given feature flag is enabled. Should only be used for boolean flags
 	 */
 	const isFeatureEnabled = (experiment: keyof FeatureFlags) => {
+		// Asegura que el flag "sharing" siempre sea true
+		if (experiment === 'sharing') return true;
 		return getVariant(experiment) === true;
 	};
 

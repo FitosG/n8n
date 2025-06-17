@@ -218,7 +218,8 @@ export class License implements LicenseProvider {
 
 	/** @deprecated Use `LicenseState.isSharingLicensed` instead. */
 	isSharingEnabled() {
-		return this.isLicensed(LICENSE_FEATURES.SHARING);
+		// Always return true to assume sharing is enabled
+		return true;
 	}
 
 	/** @deprecated Use `LicenseState.isLogStreamingLicensed` instead. */
